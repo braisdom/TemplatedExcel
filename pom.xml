@@ -4,11 +4,42 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>braisdom</groupId>
+    <groupId>org.braisdom</groupId>
     <artifactId>templated-excel</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>TemplatedExcel</name>
+    <url>http://www.joowing.com</url>
+    <description>Defining Excel styles with HTML and CSS.</description>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git@github.com:braisdom/TemplatedExcel.git</connection>
+        <developerConnection>scm:git@github.com:braisdom/TemplatedExcel.git</developerConnection>
+        <url>https://github.com/braisdom/TemplatedExcel</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <organization>
+        <name>Braisdom</name>
+        <url>http://www.joowing.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>braisdom</id>
+            <name>Braisdom Wang</name>
+            <email>wangyonghe(at)msn.com</email>
+            <url>http://www.joowing.com</url>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
