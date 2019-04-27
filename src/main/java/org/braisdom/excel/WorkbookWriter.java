@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * A writer for Excel workbook, which defines the basic capacities
- * for generating Excel file.
+ * A writer for excel workbook, which defines the basic capacities
+ * for generating excel file.
  *
  * The workbook writer can be implemented by POI, etc.
  *
@@ -41,7 +41,7 @@ public interface WorkbookWriter {
     /**
      * A factory method factory method for creating the sheet writer.
      *
-     * @return a sheet writer who is used for creating Excel sheet.
+     * @return a sheet writer who is used for creating excel sheet.
      */
     public SheetWriter createSheetWriter();
 
