@@ -17,6 +17,7 @@ Defining Excel styles with HTML and CSS. It's a templated language, as same as H
 To build ph-css from source, Maven 3.0.4 is required. Any Maven version below does NOT work!
 
 ## Example
+Java Code:
 ```java
 public class Sample {
 
@@ -28,6 +29,7 @@ public class Sample {
     }
 }
 ```
+Template Code:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <workbook xmlns:th="https://www.braisdom.org/templated-excel">
@@ -81,6 +83,8 @@ public class Sample {
     </sheet>
 </workbook>
 ```
+Styled Excel:
 ![](https://raw.githubusercontent.com/braisdom/TemplatedExcel/master/images/style.png)
 
+Dynamic Excel:
 ![](https://github.com/braisdom/TemplatedExcel/blob/master/images/data-table.png?raw=true)
