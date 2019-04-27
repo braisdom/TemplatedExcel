@@ -14,7 +14,7 @@ Defining Excel styles with HTML and CSS. It's a templated language, as same as H
   <version>1.0.0</version>
 </dependency>
 ```
-To build ph-css from source, Maven 3.0.4 is required. Any Maven version below does NOT work!
+To build TemplatedExcel from source, Maven 3.0.4 is required. Any Maven version below does NOT work!
 
 ## Example
 Java Code:
