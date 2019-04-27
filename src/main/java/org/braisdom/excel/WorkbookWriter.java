@@ -26,7 +26,7 @@ import java.io.OutputStream;
  * The workbook writer can be implemented by POI, etc.
  *
  * @author braisdom
- * @since 1.0
+ * @since 1.0.0
  */
 public interface WorkbookWriter {
 

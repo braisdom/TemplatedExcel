@@ -45,7 +45,7 @@ import java.util.Set;
  * making the CSS definition as Java accessibled.
  *
  * @author braisdom
- * @since 1.0
+ * @since 1.0.0
  */
 public final class WorkbookTemplate {
 

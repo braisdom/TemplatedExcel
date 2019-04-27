@@ -2,8 +2,9 @@ package org.braisdom.excel;
 
 /**
  * Declaring the elements of TemplateExcel.
+ *
  * @author braisdom
- * @since 1.0
+ * @since 1.0.0
  */
 public enum WorkbookElement {
     /** The root elements of TemplateExcel */
