@@ -28,7 +28,7 @@ public enum WorkbookAttribute {
     /** The height of row */
     HEIGHT("height"),
     /** The gaps is the distance rows above row  */
-    RPW_GAPS("row-gaps"),
+    ROW_GAPS("row-gaps"),
     /** The style of a row or a cell */
     STYLE("style"),
     /** The index of a cell */

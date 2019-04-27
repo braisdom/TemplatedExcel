@@ -87,11 +87,11 @@ public final class WorkbookTemplate {
 
             for (int rowIndex = 0; rowIndex < rowElements.size(); rowIndex++) {
                 Element rowElement = rowElements.get(rowIndex);
-                int assignedRowGaps = StyleUtils.safeInteger(rowElement.attributeValue(WorkbookAttribute.RPW_GAPS.getValue()));
+                int assignedRowGaps = StyleUtils.safeInteger(rowElement.attributeValue(WorkbookAttribute.ROW_GAPS.getValue()));
                 // The gaps defined of row will be effecting the realRowIndex.
-                realRowIndex += (assignedRowGaps + rowIndex);
+                realRowIndex += assignedRowGaps;
                 if (rowElement.getName().equals(WorkbookElement.ROW.getValue())) {
-                    processRowElement(realRowIndex, rowElement, sheetWriter);
+                    processRowElement(realRowIndex + rowIndex, rowElement, sheetWriter);
                 } else if (rowElement.getName().equals(WorkbookElement.DATA_TABLE.getValue())) {
                     // The DataTable has multiple rows, so the realRowIndex will be changed after it generated.
                     realRowIndex = processDataTableElement(realRowIndex, rowElement, sheetWriter);
@@ -150,7 +150,7 @@ public final class WorkbookTemplate {
         int columnSpan = StyleUtils.safeInteger(rawColumnSpan);
 
         CellWriter cellWriter = rowWriter.createCellWriter(assignedColumnIndex);
-        cellWriter.setValue(cellElement.getText());
+        cellWriter.setValue(cellElement.getText().trim());
         cellWriter.setQuotePrefix(quotePrefix);
         cellWriter.setFitContent(fitContent);
         cellWriter.setRowColumnSpan(rowIndex, assignedColumnIndex, rowSpan, columnSpan);
@@ -179,10 +179,10 @@ public final class WorkbookTemplate {
         if (headerElement != null) {
             List<Element> rowElements = headerElement.elements(WorkbookElement.ROW.getValue());
             for (int headerRowIndex = 0; headerRowIndex < rowElements.size(); headerRowIndex++) {
-                Element rowElement = rowElements.get(0);
-                int assignedRowGaps = StyleUtils.safeInteger(rowElement.attributeValue(WorkbookAttribute.RPW_GAPS.getValue()));
-                dataTableRowIndex += (assignedRowGaps + headerRowIndex);
-                processRowElement(dataTableRowIndex, rowElement, sheetWriter);
+                Element rowElement = rowElements.get(headerRowIndex);
+                int assignedRowGaps = StyleUtils.safeInteger(rowElement.attributeValue(WorkbookAttribute.ROW_GAPS.getValue()));
+                dataTableRowIndex += assignedRowGaps;
+                processRowElement(dataTableRowIndex + headerRowCount, rowElement, sheetWriter);
                 headerRowCount++;
             }
         }
@@ -190,10 +190,10 @@ public final class WorkbookTemplate {
         if (bodyElement != null) {
             List<Element> rowElements = bodyElement.elements(WorkbookElement.ROW.getValue());
             for (int bodyRowIndex = 0; bodyRowIndex < rowElements.size(); bodyRowIndex++) {
-                Element rowElement = rowElements.get(0);
-                int assignedRowGaps = StyleUtils.safeInteger(rowElement.attributeValue(WorkbookAttribute.RPW_GAPS.getValue()));
-                dataTableRowIndex += (assignedRowGaps + bodyRowIndex);
-                processRowElement(dataTableRowIndex + headerRowCount, rowElement, sheetWriter);
+                Element rowElement = rowElements.get(bodyRowIndex);
+                int assignedRowGaps = StyleUtils.safeInteger(rowElement.attributeValue(WorkbookAttribute.ROW_GAPS.getValue()));
+                dataTableRowIndex += assignedRowGaps;
+                processRowElement(dataTableRowIndex + headerRowCount + bodyRowIndex, rowElement, sheetWriter);
             }
         }
         return dataTableRowIndex;
