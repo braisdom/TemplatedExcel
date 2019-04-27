@@ -22,7 +22,8 @@ Java Code:
 public class Sample {
 
     public static void main(String[] args) throws Exception {
-        InputStreamReader inputStreamReader = new InputStreamReader(Sample.class.getResourceAsStream("/template.xml"));
+        InputStreamReader inputStreamReader = new InputStreamReader(Sample
+                .class.getResourceAsStream("/template.xml"));
         File excelFile = new File("./sample.xls");
         WorkbookTemplate workbookTemplate = new WorkbookTemplate(inputStreamReader);
         workbookTemplate.process(new SampleTemplateDataSource(), new PoiWorkBookWriter(), excelFile);
