@@ -42,7 +42,7 @@ Defining Excel styles with HTML and CSS. It's a templated language, as same as H
 [ph-css](https://github.com/phax/ph-css "ph-css") For parsing CSS text,[thymeleaf](https://github.com/thymeleaf/thymeleaf "thymeleaf") For dynamic template file.
 
 # Quick Start
-## Maven dependets
+## Maven dependency
 ```xml
 <dependency>
   <groupId>com.github.braisdom</groupId>

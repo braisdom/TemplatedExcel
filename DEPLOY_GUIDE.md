@@ -47,3 +47,5 @@
     </distributionManagement>
 
 ```
+https://issues.sonatype.org/browse/OSSRH-48040?filter=-4
+https://oss.sonatype.org/index.html
