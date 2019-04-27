@@ -5,6 +5,10 @@ Defining Excel styles with HTML and CSS. It's a templated language, as same as H
 	- Providing the basic capbility for excel generating, includes CSS defined cell style, dynamic template with Java objects which can be a getter method or Hash.
 	- Interface abstracted for various  Excel adapter
 
+# Reference
+[ph-css](https://github.com/phax/ph-css "ph-css") For parsing CSS text.
+[thymeleaf](https://github.com/thymeleaf/thymeleaf "thymeleaf") For dynamic template file.
+
 # Quick Start
 ## Maven dependets
 ```xml
