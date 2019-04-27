@@ -36,11 +36,13 @@ import java.util.Set;
  * and generates the full structured data for writing the excel file.
  *
  * <p>
- * The thymeleaf is used for the raw template file parsing. Structure the template
- * files with XML format, and the Dom4j will be used for XML content processing.
+ * The <a href="https://github.com/thymeleaf/thymeleaf">thymeleaf</a> is used for the raw
+ * template file parsing and generating the content which from Java objects. Structure the
+ * template files with XML format, and the Dom4j will be used for XML content processing.
  * </p>
  *
- * The ph-css(https://github.com/phax/ph-css) is used for parsing CSS text.
+ * The <a href="https://github.com/phax/ph-css">ph-css</a> is used for parsing CSS text, and
+ * making the CSS definition as Java accessibled.
  *
  * @author braisdom
  * @since 1.0
@@ -160,10 +162,11 @@ public final class WorkbookTemplate {
     }
 
     /**
+     * Parsing the data-table tags and generating the rows and cells of Excel
      *
-     * @param rowIndex
-     * @param dataTableElement
-     * @param sheetWriter
+     * @param rowIndex current row index of Excel
+     * @param dataTableElement the data table definition
+     * @param sheetWriter the sheet writer of Excel
      *
      * @return
      */

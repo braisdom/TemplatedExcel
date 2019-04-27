@@ -3,14 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.braisdom</groupId>
+    <groupId>com.github.braisdom</groupId>
     <artifactId>templated-excel</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
     <name>TemplatedExcel</name>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
     <url>http://www.joowing.com</url>
-    <description>Defining Excel styles with HTML and CSS.</description>
+    <description>Defining Excel styles with HTML and CSS. It's a templated language, as same as HTML.</description>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <licenses>
         <license>
@@ -21,14 +26,17 @@
     </licenses>
 
     <scm>
-        <connection>scm:git@github.com:braisdom/TemplatedExcel.git</connection>
-        <developerConnection>scm:git@github.com:braisdom/TemplatedExcel.git</developerConnection>
+        <connection>scm:git:git@github.com:braisdom/TemplatedExcel.git</connection>
+        <developerConnection>scm:git:git@github.com:braisdom/TemplatedExcel.git</developerConnection>
         <url>https://github.com/braisdom/TemplatedExcel</url>
-        <tag>HEAD</tag>
     </scm>
 
+    <issueManagement>
+        <url>https://github.com/braisdom/TemplatedExcel/issues</url>
+    </issueManagement>
+
     <organization>
-        <name>Braisdom</name>
+        <name>com.github.braisdom</name>
         <url>http://www.joowing.com</url>
     </organization>
 
@@ -36,8 +44,9 @@
         <developer>
             <id>braisdom</id>
             <name>Braisdom Wang</name>
-            <email>wangyonghe(at)msn.com</email>
+            <email>wangyonghe@msn.com</email>
             <url>http://www.joowing.com</url>
+            <timezone>+8</timezone>
         </developer>
     </developers>
 
@@ -45,6 +54,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <javadoc.version>8</javadoc.version>
+        <compiler-plugin.version>3.6.2</compiler-plugin.version>
+        <war-plugin.version>3.1.0</war-plugin.version>
+        <clean-plugin.version>3.0.0</clean-plugin.version>
+        <resources-plugin.version>3.0.2</resources-plugin.version>
+        <surefire-plugin.version>2.20</surefire-plugin.version>
+        <jar-plugin.version>3.0.2</jar-plugin.version>
+        <source-plugin.version>3.0.1</source-plugin.version>
+        <javadoc-plugin.version>2.10.4</javadoc-plugin.version>
+        <gpg-plugin.version>1.6</gpg-plugin.version>
         <skipTests>true</skipTests>
     </properties>
 
@@ -89,38 +108,179 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <!-- xml放在java目录下-->
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <updateReleaseInfo>true</updateReleaseInfo>
+                    </configuration>
+                </plugin>
 
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.7</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
 
-        <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.0</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-        </plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>1.8.1</version>
+                    <configuration>
+                        <connectionType>connection</connectionType>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.4</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.20</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.5</version>
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.sonatype.plugins</groupId>
+                            <artifactId>nexus-staging-maven-plugin</artifactId>
+                            <version>1.6.3</version>
+                            <extensions>true</extensions>
+                            <configuration>
+                                <serverId>releases</serverId>
+                                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                                <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-release-plugin</artifactId>
+                            <configuration>
+                                <autoVersionSubmodules>true</autoVersionSubmodules>
+                                <useReleaseProfile>true</useReleaseProfile>
+                                <releaseProfiles>release</releaseProfiles>
+                                <goals>deploy</goals>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-gpg-plugin</artifactId>
+                            <version>1.6</version>
+                            <executions>
+                                <execution>
+                                    <id>sign-artifacts</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>sign</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <version>2.9.1</version>
+                            <configuration>
+                                <additionalparam>-Xdoclint:none</additionalparam>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>attach-javadocs</id>
+                                    <goals>
+                                        <goal>jar</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+
+    <distributionManagement>
+        <repository>
+            <id>braisdom</id>
+            <name>snapshots repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 
 </project>
