@@ -19,7 +19,25 @@ Defining Excel styles with HTML and CSS. It's a templated language, as same as H
 |   |style   |The style of cell which describes Excel cell style   ||
 
 # CSS properties supported
-
+`Not supported by all CSS standards, all color is hex color definition only.`
+- ***background-color***: Hex color definition supported only.  eg: #FFFFFF.
+- ***text-color***: Hex color definition supported only.  eg: #FFFFFF.
+- ***horizontal-alignment***: left, right, center supported only.
+- ***vertical-aligment***: top, bottom, center supported only.
+- ***border***: eg: 1px thin #000000, The border-style supported is thin, medium, dashed, dotted, thick, double and hair only.
+- ***border-top-style***: as same as border.
+- ***border-bottom-style***: as same as border.
+- ***border-left-style***: as same as border.
+- ***border-right-style***: as same as border.
+- ***border-top-color***: as same as border.
+- ***border-bottom-color***: as same as border.
+- ***border-left-color***: as same as border.
+- ***border-right-color***: as same as border.
+- ***font-weight***: bold or others.
+- ***font-family***: eg: Microsoft YaHei, the font name in excel.
+- ***font-size***: eg: 12px, the font size in excel.
+- ***font-style***: italic or others.
+- ***text-decoration***: underline or others.
 # Reference
 [ph-css](https://github.com/phax/ph-css "ph-css") For parsing CSS text,[thymeleaf](https://github.com/thymeleaf/thymeleaf "thymeleaf") For dynamic template file.
 
