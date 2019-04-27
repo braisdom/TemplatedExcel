@@ -1,3 +1,19 @@
+/**
+ * Copyright (C) 2019-2025 Braisdom Wang (www.joowing.com)
+ * wangyonghe@msn.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.braisdom.excel;
 
 import com.helger.css.propertyvalue.CCSSValue;
@@ -15,20 +31,47 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * This class is the base of the TemplatedExcel, it parses the raw template file
+ * and generates the full structured data for writing the excel file.
+ *
+ * <p>
+ * The thymeleaf is used for the raw template file parsing. Structure the template
+ * files with XML format, and the Dom4j will be used for XML content processing.
+ * </p>
+ *
+ * The ph-css(https://github.com/phax/ph-css) is used for parsing CSS text.
+ *
+ * @author braisdom
+ * @since 1.0
+ */
 public final class WorkbookTemplate {
 
+    /** The reader of the raw template content */
     private final Reader reader;
 
+    /** Create the WorkbookTemplate with string of template content */
     public WorkbookTemplate(String templateContent) {
         this(new StringReader(templateContent));
     }
 
+    /** Create the WorkbookTemplate with input reader */
     public WorkbookTemplate(Reader reader) {
         this.reader = reader;
     }
 
+    /**
+     * The main method for Excel file generating.
+     *
+     * @param templateDataSource the data source will be used for thymeleaf
+     * @param workbookWriter The Excel file generator.
+     * @param excelFile The Excel file reference.
+     * @throws IOException If read template source failure.
+     * @throws DocumentException If parsing template content failure
+     */
     public void process(TemplateDataSource templateDataSource,
-                        WorkbookWriter workbookWriter, File excelFile) throws IOException, DocumentException {
+                        WorkbookWriter workbookWriter,
+                        File excelFile) throws IOException, DocumentException {
         String templateContent = processTemplate(templateDataSource);
         Document document = DocumentHelper.parseText(templateContent);
         List<Element> sheetElements = document.getRootElement().elements(WorkbookElement.SHEET.getValue());
@@ -37,15 +80,18 @@ public final class WorkbookTemplate {
             SheetWriter sheetWriter = workbookWriter.createSheetWriter();
             List<Element> rowElements = sheetElement.elements();
             int realRowIndex = 0;
+
             processSheet(sheetElement, sheetWriter);
 
             for (int rowIndex = 0; rowIndex < rowElements.size(); rowIndex++) {
                 Element rowElement = rowElements.get(rowIndex);
                 int assignedRowGaps = StyleUtils.safeInteger(rowElement.attributeValue(WorkbookAttribute.RPW_GAPS.getValue()));
+                // The gaps defined of row will be effecting the realRowIndex.
                 realRowIndex += (assignedRowGaps + rowIndex);
                 if (rowElement.getName().equals(WorkbookElement.ROW.getValue())) {
                     processRowElement(realRowIndex, rowElement, sheetWriter);
                 } else if (rowElement.getName().equals(WorkbookElement.DATA_TABLE.getValue())) {
+                    // The DataTable has multiple rows, so the realRowIndex will be changed after it generated.
                     realRowIndex = processDataTableElement(realRowIndex, rowElement, sheetWriter);
                 }
             }
@@ -54,6 +100,13 @@ public final class WorkbookTemplate {
         workbookWriter.save(new FileOutputStream(excelFile));
     }
 
+    /**
+     * Generating the row of Excel and attaching the style of row.
+     *
+     * @param rowIndex The real row index of Excel.
+     * @param rowElement The structured row element who has the definition of CSS and the attributes.
+     * @param sheetWriter The sheet writer of Excel, it will be used for creating row writer.
+     */
     private void processRowElement(int rowIndex, Element rowElement, SheetWriter sheetWriter) {
         String style = rowElement.attributeValue(WorkbookAttribute.STYLE.getValue());
         String height = rowElement.attributeValue(WorkbookAttribute.HEIGHT.getValue());
@@ -73,6 +126,15 @@ public final class WorkbookTemplate {
         }
     }
 
+    /**
+     * Generating the cell of Excel and attaching the style of cell.
+     *
+     * @param rowIndex The real row index of Excel.
+     * @param rowStyle The row style for cell inheriting.
+     * @param columnIndex The real column index of Excel.
+     * @param cellElement The structured cell element who has the definition of CSS and the attributes.
+     * @param rowWriter The row writer of Excel, it will be used for creating cell writer.
+     */
     private void processCellElement(int rowIndex, String rowStyle, int columnIndex, Element cellElement, RowWriter rowWriter) {
         String rawAssignedCellIndex = cellElement.attributeValue(WorkbookAttribute.COLUMN.getValue());
         String rawRowSpan = cellElement.attributeValue(WorkbookAttribute.ROWSPAN.getValue());
@@ -97,6 +159,14 @@ public final class WorkbookTemplate {
             cellWriter.setStyle(style);
     }
 
+    /**
+     *
+     * @param rowIndex
+     * @param dataTableElement
+     * @param sheetWriter
+     *
+     * @return
+     */
     private int processDataTableElement(int rowIndex, Element dataTableElement, SheetWriter sheetWriter) {
         Element headerElement = dataTableElement.element(WorkbookElement.HEADER.getValue());
         Element bodyElement = dataTableElement.element(WorkbookElement.BODY.getValue());
