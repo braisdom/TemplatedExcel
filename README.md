@@ -1,13 +1,27 @@
 # TemplatedExcel
 Defining Excel styles with HTML and CSS. It's a templated language, as same as HTML.
 # News and noteworthy
-- V1.0.0 release 2019-04-28
+- V1.0.1 release 2019-04-28
 	- Providing the basic capbility for excel generating, includes CSS defined cell style, dynamic template with Java objects which can be a getter method or Hash.
 	- Interface abstracted for various  Excel adapter
 
+# Template language tags
+|Tag Name |Attribute   |Description   |
+| ------------ | ------------ | ------------ |
+|workbook   |--|The root element   |
+|sheet   |name   |The name of sheet, it will be displayed in Excel   |
+|row   |height   |The height of row   |
+|   |style   |The style of the row will apply to all cells included it    |
+|cell   |fit-content   |Adjusts the column width to fit the contents.    |
+|   |quote-prefixed   |Let numbers appear as non-numeric   |
+|   |colspan   |Allows a single excel cell to span the width of more than one cell or column.   |
+|   |rowspan   |Allows a single excel cell to span the height of more than one cell or row.   |
+|   |style   |The style of cell which describes Excel cell style   ||
+
+# CSS properties supported
+
 # Reference
-[ph-css](https://github.com/phax/ph-css "ph-css") For parsing CSS text.
-[thymeleaf](https://github.com/thymeleaf/thymeleaf "thymeleaf") For dynamic template file.
+[ph-css](https://github.com/phax/ph-css "ph-css") For parsing CSS text,[thymeleaf](https://github.com/thymeleaf/thymeleaf "thymeleaf") For dynamic template file.
 
 # Quick Start
 ## Maven dependets
