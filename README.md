@@ -117,9 +117,12 @@ Template Code:
             </header>
             <body>
                 <row th:each="user : ${users}">
-                    <cell fit-content="true" style="border: 1px thin #000000;" th:text="${user.name}"/>
-                    <cell fit-content="true" style="border: 1px thin #000000;" th:text="${user.gender}"/>
-                    <cell fit-content="true" style="border: 1px thin #000000;" th:text="${user.occupation}"/>
+                    <cell fit-content="true" style="border: 1px thin #000000;"
+                          th:text="${user.name}"/>
+                    <cell fit-content="true" style="border: 1px thin #000000;"
+                          th:text="${user.gender}"/>
+                    <cell fit-content="true" style="border: 1px thin #000000;"
+                          th:text="${user.occupation}"/>
                 </row>
             </body>
         </data-table>
