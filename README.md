@@ -81,13 +81,15 @@ Template Code:
             <cell fit-content="true" style="color: #FF0000;">Color Text</cell>
         </row>
         <row>
-            <cell fit-content="true" style="background-color: #FF0000;color: #FFFFFF;">Background Color</cell>
+            <cell fit-content="true"
+                style="background-color: #FF0000;color: #FFFFFF;">Background Color</cell>
         </row>
         <row>
             <cell fit-content="true" style="border:1px thin #FF0000;">Cell Border</cell>
         </row>
         <row>
-            <cell style="font-style: italic;font-weight: bold;font-family: Microsoft YaHei;text-decoration: underline;">
+            <cell style="font-style: italic;font-weight: bold;
+                        font-family: Microsoft YaHei;text-decoration: underline;">
                 Font Style
             </cell>
         </row>
@@ -99,14 +101,18 @@ Template Code:
         <data-table>
             <header>
                 <row height="30">
-                    <cell colspan="2" style="font-size: 18;font-weight: bold;text-align: center;vertical-align: center;">
+                    <cell colspan="2" style="font-size: 18;font-weight: bold;
+                            text-align: center;vertical-align: center;">
                         Employee Table
                     </cell>
                 </row>
                 <row>
-                    <cell fit-content="true" style="font-weight: bold;border: 1px thin #000000;">Name</cell>
-                    <cell fit-content="true" style="font-weight: bold;border: 1px thin #000000;">Gender</cell>
-                    <cell fit-content="true" style="font-weight: bold;border: 1px thin #000000;">Occupation</cell>
+                    <cell fit-content="true" style="font-weight: bold;
+                            border: 1px thin #000000;">Name</cell>
+                    <cell fit-content="true" style="font-weight: bold;
+                            border: 1px thin #000000;">Gender</cell>
+                    <cell fit-content="true" style="font-weight: bold;
+                            border: 1px thin #000000;">Occupation</cell>
                 </row>
             </header>
             <body>
