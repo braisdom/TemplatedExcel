@@ -111,7 +111,7 @@ Template Code:
                             border: 1px thin #000000;">Name</cell>
                     <cell fit-content="true" style="font-weight: bold;
                             border: 1px thin #000000;">Gender</cell>
-                    <cell fit-content="true" style="font-weight: bold;
+                    <cell fit-content="true" style="font-weight: bold; s
                             border: 1px thin #000000;">Occupation</cell>
                 </row>
             </header>
