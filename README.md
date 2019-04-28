@@ -120,8 +120,5 @@ Template Code:
     </sheet>
 </workbook>
 ```
-Styled Excel:
 ![](https://raw.githubusercontent.com/braisdom/TemplatedExcel/master/images/style.png)
-
-Dynamic Excel:
 ![](https://github.com/braisdom/TemplatedExcel/blob/master/images/data-table.png?raw=true)
