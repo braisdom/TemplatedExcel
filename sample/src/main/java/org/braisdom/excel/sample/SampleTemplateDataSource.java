@@ -19,11 +19,13 @@ public class SampleTemplateDataSource implements TemplateDataSource {
         abbas.setName("Abbas");
         abbas.setGender("male");
         abbas.setOccupation("Software Engineer");
+        abbas.setAge(11);
 
         User almeric = new User();
         almeric.setName("Almeric");
         almeric.setGender("male");
         almeric.setOccupation("Software Engineer");
+        almeric.setAge(12);
 
         users.add(abbas);
         users.add(almeric);
@@ -35,6 +37,7 @@ public class SampleTemplateDataSource implements TemplateDataSource {
         private String name;
         private String gender;
         private String occupation;
+        private Integer age;
 
         public String getName() {
             return name;
@@ -58,6 +61,14 @@ public class SampleTemplateDataSource implements TemplateDataSource {
 
         public void setOccupation(String occupation) {
             this.occupation = occupation;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
         }
     }
 
