@@ -1,6 +1,9 @@
 # TemplatedExcel
 Defining Excel styles with HTML and CSS. It's a templated language, as same as HTML.
 # News and noteworthy
+- V1.1.0 release 2019-10-04
+	- Adjust the 'autoColumnSize' after the content generated.
+	- Create the style of cell lazyly.
 - V1.0.1 release 2019-04-28
 	- Providing the basic capbility for excel generating, includes CSS defined cell style, dynamic template with Java objects which can be a getter method or Hash.
 	- Interface abstracted for various  Excel adapter
