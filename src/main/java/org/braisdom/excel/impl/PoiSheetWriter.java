@@ -45,4 +45,9 @@ public class PoiSheetWriter implements SheetWriter {
         HSSFRow hssfRow = hssfSheet.createRow(rowNum);
         return new PoiRowWriter(hssfWorkbook, palette, hssfSheet, hssfRow);
     }
+
+    @Override
+    public void autoSizeColumn(int columnIndex) {
+        this.hssfSheet.autoSizeColumn(columnIndex);
+    }
 }

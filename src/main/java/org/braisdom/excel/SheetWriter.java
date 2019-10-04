@@ -38,4 +38,11 @@ public interface SheetWriter {
      */
     public RowWriter createRowWriter(int rowNum);
 
+    /**
+     * Make the column fit to the content.
+     *
+     * @since 1.0.3
+     */
+    public void autoSizeColumn(int columnIndex);
+
 }

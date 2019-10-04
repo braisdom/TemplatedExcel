@@ -1,13 +1,13 @@
 /**
  * Copyright (C) 2019-2025 Braisdom Wang (www.joowing.com)
  * wangyonghe@msn.com
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,8 +32,8 @@ public class PoiCellWriter implements CellWriter {
     private final HSSFRow hssfRow;
     private final HSSFCell hssfCell;
     private final HSSFPalette palette;
-    private final HSSFCellStyle hssfCellStyle;
-    private final HSSFFont hssfFont;
+
+    private boolean quotePrefix;
 
     public PoiCellWriter(HSSFWorkbook hssfWorkbook,
                          HSSFPalette palette,
@@ -45,12 +45,6 @@ public class PoiCellWriter implements CellWriter {
         this.hssfSheet = hssfSheet;
         this.hssfRow = hssfRow;
         this.hssfCell = hssfCell;
-
-        this.hssfCellStyle = hssfWorkbook.createCellStyle();
-        this.hssfFont = hssfWorkbook.createFont();
-
-        this.hssfCell.setCellStyle(hssfCellStyle);
-        this.hssfCellStyle.setFont(hssfFont);
     }
 
     @Override
@@ -60,12 +54,12 @@ public class PoiCellWriter implements CellWriter {
 
     @Override
     public void setQuotePrefix(boolean quotePrefix) {
-        hssfCellStyle.setQuotePrefixed(quotePrefix);
+        this.quotePrefix = quotePrefix;
     }
 
     @Override
     public void setFitContent(boolean fitContent) {
-        if(fitContent) {
+        if (fitContent) {
             int columnIndex = hssfCell.getColumnIndex();
             hssfSheet.autoSizeColumn(columnIndex, true);
         }
@@ -73,7 +67,7 @@ public class PoiCellWriter implements CellWriter {
 
     @Override
     public void setRowColumnSpan(int rowIndex, int columnIndex, int rowSpan, int columnSpan) {
-        if(rowSpan >0 || columnSpan > 0) {
+        if (rowSpan > 0 || columnSpan > 0) {
             CellRangeAddress region = new CellRangeAddress(rowIndex, rowIndex + rowSpan,
                     columnIndex, columnIndex + columnSpan);
             hssfSheet.addMergedRegionUnsafe(region);
@@ -83,7 +77,15 @@ public class PoiCellWriter implements CellWriter {
     @Override
     public void setStyle(String style) {
         Map<String, List<CSSDeclaration>> cssDeclarations = StyleUtils.getStyle(style);
-        if(!cssDeclarations.isEmpty()) {
+        if (!cssDeclarations.isEmpty()) {
+            HSSFCellStyle hssfCellStyle = hssfWorkbook.createCellStyle();
+            HSSFFont hssfFont = hssfWorkbook.createFont();
+
+            hssfCell.setCellStyle(hssfCellStyle);
+
+            hssfCellStyle.setQuotePrefixed(quotePrefix);
+            hssfCellStyle.setFont(hssfFont);
+
             StyleUtils.setBackgroundColorStyle(palette, hssfCellStyle, cssDeclarations.get(ECSSProperty.BACKGROUND_COLOR.getName()));
             StyleUtils.setTextColor(palette, hssfFont, cssDeclarations.get(ECSSProperty.COLOR.getName()));
 
@@ -108,6 +110,11 @@ public class PoiCellWriter implements CellWriter {
             StyleUtils.setFontSize(hssfFont, cssDeclarations.get(ECSSProperty.FONT_SIZE.getName()));
             StyleUtils.setFontStyle2(hssfFont, cssDeclarations.get(ECSSProperty.FONT_STYLE.getName()));
             StyleUtils.setTextDecoration(hssfFont, cssDeclarations.get(ECSSProperty.TEXT_DECORATION.getName()));
+        } else if (quotePrefix) {
+            HSSFCellStyle hssfCellStyle = hssfWorkbook.createCellStyle();
+            hssfCell.setCellStyle(hssfCellStyle);
+
+            hssfCellStyle.setQuotePrefixed(quotePrefix);
         }
     }
 }

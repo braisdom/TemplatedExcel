@@ -38,6 +38,7 @@ public interface CellWriter extends StyleAware {
 
     /**
      * Sets the merged rows and cells
+     *
      * @param rowIndex Index of first row
      * @param columnIndex  Index of first column
      * @param rowSpan  The distance for {@code rowIndex}
@@ -47,7 +48,9 @@ public interface CellWriter extends StyleAware {
 
     /**
      * Sets whether cell width is fit content.
+     *
      * @param fitContent
      */
     public void setFitContent(boolean fitContent);
+
 }
