@@ -6,7 +6,7 @@
     <groupId>com.github.braisdom</groupId>
     <artifactId>templated-excel</artifactId>
     <name>TemplatedExcel</name>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <url>http://www.joowing.com</url>
     <description>Defining Excel styles with HTML and CSS. It's a templated language, as same as HTML.</description>
