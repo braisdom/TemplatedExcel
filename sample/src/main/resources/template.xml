@@ -29,23 +29,23 @@
         <data-table>
             <header>
                 <row height="30">
-                    <cell colspan="2" style="font-size: 18;font-weight: bold;text-align: center;vertical-align: center;">
+                    <cell colspan="3" style="font-size: 18;font-weight: bold;text-align: center;vertical-align: center;">
                         Employee Table
                     </cell>
                 </row>
-                <row>
-                    <cell fit-content="true" style="font-weight: bold;border: 1px thin #000000;">Name</cell>
-                    <cell fit-content="true" style="font-weight: bold;border: 1px thin #000000;">Gender</cell>
-                    <cell fit-content="true" style="font-weight: bold;border: 1px thin #000000;">Age</cell>
-                    <cell fit-content="true" style="font-weight: bold;border: 1px thin #000000;">Occupation</cell>
+                <row fit-content="true" >
+                    <cell style="font-weight: bold; border: 1px thin #000000;">Name</cell>
+                    <cell style="font-weight: bold; border: 1px thin #000000;">Gender</cell>
+                    <cell style="font-weight: bold; border: 1px thin #000000;">Age</cell>
+                    <cell style="font-weight: bold; border: 1px thin #000000;">Occupation</cell>
                 </row>
             </header>
             <body>
                 <row th:each="user : ${users}">
-                    <cell fit-content="true" style="border: 1px thin #000000;" th:text="${user.name}"/>
-                    <cell fit-content="true" style="border: 1px thin #000000;" th:text="#{1 + 1}"/>
-                    <cell fit-content="true" style="border: 1px thin #000000;" th:text="${user.gender}"/>
-                    <cell fit-content="true" style="border: 1px thin #000000;" th:text="${user.occupation}"/>
+                    <cell th:text="${user.name}"/>
+                    <cell th:text="${user.gender}"/>
+                    <cell th:text="${user.gender}"/>
+                    <cell th:text="${user.occupation}"/>
                 </row>
             </body>
         </data-table>

@@ -31,8 +31,6 @@ public class PoiRowWriter implements RowWriter {
     private final HSSFSheet hssfSheet;
     private final HSSFRow hssfRow;
     private final HSSFPalette palette;
-    private final HSSFCellStyle hssfCellStyle;
-    private final HSSFFont hssfFont;
 
     public PoiRowWriter(HSSFWorkbook hssfWorkbook,
                         HSSFPalette palette,
@@ -42,11 +40,6 @@ public class PoiRowWriter implements RowWriter {
         this.palette = palette;
         this.hssfSheet = hssfSheet;
         this.hssfRow = hssfRow;
-        this.hssfCellStyle = hssfWorkbook.createCellStyle();
-        this.hssfFont = hssfWorkbook.createFont();
-
-        this.hssfRow.setRowStyle(hssfCellStyle);
-        this.hssfCellStyle.setFont(hssfFont);
     }
 
     @Override
@@ -58,6 +51,12 @@ public class PoiRowWriter implements RowWriter {
     public void setStyle(String style) {
         Map<String, List<CSSDeclaration>> cssDeclarations = StyleUtils.getStyle(style);
         if(!cssDeclarations.isEmpty()) {
+            HSSFCellStyle hssfCellStyle = hssfWorkbook.createCellStyle();
+            HSSFFont hssfFont = hssfWorkbook.createFont();
+
+            this.hssfRow.setRowStyle(hssfCellStyle);
+            hssfCellStyle.setFont(hssfFont);
+
             StyleUtils.setBackgroundColorStyle(palette, hssfCellStyle, cssDeclarations.get(ECSSProperty.BACKGROUND_COLOR.getName()));
             StyleUtils.setTextColor(palette, hssfFont, cssDeclarations.get(ECSSProperty.COLOR.getName()));
 

@@ -208,6 +208,7 @@ public final class WorkbookTemplate {
             }
         }
 
+        // Resize the column width finally because the POI performance problem.
         if (fitContent) {
             for (int i = 0; i < columnCount; i++) {
                 sheetWriter.autoSizeColumn(i);

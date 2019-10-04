@@ -9,27 +9,25 @@ import java.util.Set;
 
 public class SampleTemplateDataSource implements TemplateDataSource {
 
+    private List<User> users = new ArrayList<User>();
+
+    public SampleTemplateDataSource() {
+        for (int i = 0; i < 4000; i++) {
+            User abbas = new User();
+            abbas.setName("Abbas");
+            abbas.setGender("male");
+            abbas.setOccupation("Software Engineer");
+            abbas.setAge(11);
+
+            users.add(abbas);
+        }
+    }
+
     public Set<String> getDataNames() {
         return Collections.singleton("users");
     }
 
     public Object getData(String name) {
-        List<User> users = new ArrayList<User>();
-        User abbas = new User();
-        abbas.setName("Abbas");
-        abbas.setGender("male");
-        abbas.setOccupation("Software Engineer");
-        abbas.setAge(11);
-
-        User almeric = new User();
-        almeric.setName("Almeric");
-        almeric.setGender("male");
-        almeric.setOccupation("Software Engineer");
-        almeric.setAge(12);
-
-        users.add(abbas);
-        users.add(almeric);
-
         return users;
     }
 
