@@ -58,14 +58,6 @@ public class PoiCellWriter implements CellWriter {
     }
 
     @Override
-    public void setFitContent(boolean fitContent) {
-        if (fitContent) {
-            int columnIndex = hssfCell.getColumnIndex();
-            hssfSheet.autoSizeColumn(columnIndex, true);
-        }
-    }
-
-    @Override
     public void setRowColumnSpan(int rowIndex, int columnIndex, int rowSpan, int columnSpan) {
         if (rowSpan > 0 || columnSpan > 0) {
             CellRangeAddress region = new CellRangeAddress(rowIndex, rowIndex + rowSpan,

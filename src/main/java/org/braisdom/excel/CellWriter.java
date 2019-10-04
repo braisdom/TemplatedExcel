@@ -46,11 +46,4 @@ public interface CellWriter extends StyleAware {
      */
     public void setRowColumnSpan(int rowIndex, int columnIndex, int rowSpan, int columnSpan);
 
-    /**
-     * Sets whether cell width is fit content.
-     *
-     * @param fitContent
-     */
-    public void setFitContent(boolean fitContent);
-
 }
