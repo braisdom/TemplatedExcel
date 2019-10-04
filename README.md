@@ -50,7 +50,7 @@ Defining Excel styles with HTML and CSS. It's a templated language, as same as H
 <dependency>
   <groupId>com.github.braisdom</groupId>
   <artifactId>templated-excel</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 To build TemplatedExcel from source, Maven 3.0.4 is required. Any Maven version below does NOT work!
