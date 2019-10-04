@@ -302,7 +302,7 @@
 
     <distributionManagement>
         <repository>
-            <id>braisdom</id>
+            <id>release</id>
             <name>snapshots repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
